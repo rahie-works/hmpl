@@ -183,7 +183,7 @@ describe("compile function", () => {
     `${COMPILE_OPTIONS_ERROR}: The value of the property "${DISALLOWED_TAGS}" must be an array`
   );
   e(
-    ``,
+    `throws an error when the same binding target is used multiple times`,
     () =>
       compile(
         createTestObj2(
@@ -193,12 +193,12 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: Duplicate binding target value "customTarget"`
   );
   e(
-    ``,
+    `throws an error when bind value is not a string or object`,
     () => compile(createTestObj2(`{{#r src="/api/test" bind=1}}{{/r}}`)),
     `${REQUEST_COMPONENT_ERROR}: The "${BIND}" value must be a string or an object`
   );
   e(
-    ``,
+    `throws an error when bind object contains unexpected properties`,
     () =>
       compile(
         createTestObj2(
@@ -208,12 +208,12 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: Unexpected property "a"`
   );
   e(
-    ``,
+    `throws an error when bind object is empty`,
     () => compile(createTestObj2(`{{#r src="/api/test" bind={} }}{{/r}}`)),
     `${REQUEST_COMPONENT_ERROR}: The "${BIND_TARGET}" property is missing`
   );
   e(
-    ``,
+    `throws an error when bind target property is not a string`,
     () =>
       compile(
         createTestObj2(`{{#r src="/api/test" bind={ target:1 } }}{{/r}}`)
@@ -221,7 +221,7 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: The "${BIND_TARGET}" property should be a string`
   );
   e(
-    ``,
+    `throws an error when bind prefix property is not a string`,
     () =>
       compile(
         createTestObj2(
@@ -231,7 +231,7 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: The "${BIND_PREFIX}" property should be a string`
   );
   e(
-    ``,
+    `throws a render error when binding target is not defined in template`,
     () =>
       compile(
         createTestObj2(`{{#r src="/api/test" bind="customTarget"}}{{/r}}`)
@@ -239,7 +239,7 @@ describe("compile function", () => {
     `${RENDER_ERROR}: Binding target "customTarget" not found`
   );
   e(
-    ``,
+    `throws an error when binding target string contains spaces`,
     () =>
       compile(
         createTestObj2(`{{#r src="/api/test" bind="custom Target"}}{{/r}}`)
@@ -247,7 +247,7 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: The binding target "custom Target" must not contain spaces`
   );
   e(
-    ``,
+    `throws an error when binding target object property contains spaces`,
     () =>
       compile(
         createTestObj2(
@@ -257,7 +257,7 @@ describe("compile function", () => {
     `${REQUEST_COMPONENT_ERROR}: The binding target "custom Target" must not contain spaces`
   );
   e(
-    ``,
+    `throws a render error when binding source request is not found`,
     () =>
       compile(
         createTestObj2(
